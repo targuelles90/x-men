@@ -1,6 +1,7 @@
 package com.meli.xmen.service;
 
 import com.meli.xmen.model.Human;
+import com.meli.xmen.model.Stats;
 import com.meli.xmen.repository.HumanRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 
@@ -58,6 +58,22 @@ class MutantServiceTest {
         Mockito.verify(repository, Mockito.times(1)).existsById(any());
         Mockito.verify(repository, Mockito.times(1)).getById(any());
         Mockito.verify(repository, Mockito.never()).save(any());
+    }
+
+    @Test
+    void getStats_thenOk() {
+        Human human = new Human();
+        human.setMutant(false);
+        Mockito.when(repository.countMutants()).thenReturn(2);
+        Mockito.when(repository.countHumans()).thenReturn(4);
+        Stats stats = service.getStats();
+
+        assertEquals(2, stats.getCountMutantDna());
+        assertEquals(4, stats.getCountHumanDna());
+        assertEquals(2/(float) 4, stats.getRatio());
+
+        Mockito.verify(repository, Mockito.times(1)).countMutants();
+        Mockito.verify(repository, Mockito.times(1)).countHumans();
     }
 
 }

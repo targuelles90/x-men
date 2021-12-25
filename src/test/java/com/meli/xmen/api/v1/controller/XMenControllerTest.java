@@ -2,6 +2,7 @@ package com.meli.xmen.api.v1.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.xmen.api.v1.dto.HumanDto;
+import com.meli.xmen.model.Stats;
 import com.meli.xmen.service.MutantService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +17,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith({SpringExtension.class})
@@ -73,5 +77,16 @@ class XMenControllerTest {
         Mockito.verify(service, Mockito.times(1)).verifyMutant(Mockito.any());
     }
 
+    @Test
+    void getStats() throws Exception {
+        Stats stats = new Stats(3,7);
+        Mockito.when(service.getStats()).thenReturn(stats);
+        mockMvc.perform(get("/v1/stats"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.count_mutant_dna", is(3)))
+                .andExpect(jsonPath("$.count_human_dna", is(7)))
+                .andExpect(jsonPath("$.ratio", is(0.43)));
+        Mockito.verify(service, Mockito.times(1)).getStats();
+    }
 
 }

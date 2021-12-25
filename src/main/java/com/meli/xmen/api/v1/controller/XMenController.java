@@ -1,7 +1,9 @@
 package com.meli.xmen.api.v1.controller;
 
 import com.meli.xmen.api.v1.dto.HumanDto;
+import com.meli.xmen.model.Stats;
 import com.meli.xmen.service.MutantService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +27,12 @@ public class XMenController {
         if(isMutant)
             return new ResponseEntity<>(HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @GetMapping(path = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Stats> stats() {
+        return new ResponseEntity<>(service.getStats(), HttpStatus.OK);
     }
 
 }

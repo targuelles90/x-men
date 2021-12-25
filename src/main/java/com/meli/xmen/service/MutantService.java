@@ -1,6 +1,7 @@
 package com.meli.xmen.service;
 
 import com.meli.xmen.model.Human;
+import com.meli.xmen.model.Stats;
 import com.meli.xmen.repository.HumanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,5 +24,11 @@ public class MutantService {
         human.setMutant(isMutant);
         repository.save(human);
         return isMutant;
+    }
+
+    public Stats getStats() {
+        int mutants = repository.countMutants();
+        int humans = repository.countHumans();
+        return new Stats(mutants, humans);
     }
 }
