@@ -16,8 +16,12 @@ public class MutantService {
     private static final String STATS = "stats";
     private final HumanRepository repository;
     private final CacheManager cacheManager;
+
     @Value("${xmen.mutant.dna.size:4}")
     private int dnaSize;
+
+    @Value("${xmen.mutant.min_sequences:1}")
+    private int minSequences;
 
     public boolean verifyMutant(String[] dna) {
         Human human = new Human(dna);
@@ -30,7 +34,7 @@ public class MutantService {
         }
         if (repository.existsById(human.getId()))
             return repository.getById(human.getId()).isMutant();
-        boolean isMutant = MutantUtil.isMutant(dna, dnaSize);
+        boolean isMutant = MutantUtil.isMutant(dna, dnaSize, minSequences);
         human.setMutant(isMutant);
         repository.save(human);
         if (cache != null) {

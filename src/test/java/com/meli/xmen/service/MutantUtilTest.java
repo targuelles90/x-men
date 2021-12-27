@@ -21,7 +21,7 @@ class MutantUtilTest {
     })
     void givenMutantDna_thenReturnTrue(String dna, int sequence) {
         String[] input = dna.split("-");
-        assertTrue(MutantUtil.isMutant(input, sequence));
+        assertTrue(MutantUtil.isMutant(input, sequence, 1));
     }
 
     @ParameterizedTest
@@ -32,6 +32,6 @@ class MutantUtilTest {
     })
     void givenMutantDna_thenReturnFalse(String dna, int sequence) {
         String[] input = dna.split("-");
-        assertFalse(MutantUtil.isMutant(input, sequence));
+        assertFalse(MutantUtil.isMutant(input, sequence, 1));
     }
 }

@@ -21,7 +21,7 @@ public class MutantUtil {
      * @param sequenceLength    Length of the valid sequence
      * @return                  True is the dna is a mutant, false otherwise
      */
-    public static boolean isMutant(String[] dna, int sequenceLength) {
+    public static boolean isMutant(String[] dna, int sequenceLength, int minSequences) {
         Map<String, List<Sequence>> map = new HashMap<>();
         map.put(HORIZONTAL, new ArrayList<>());
         map.put(VERTICAL, new ArrayList<>());
@@ -34,7 +34,7 @@ public class MutantUtil {
                 IntBinaryOperator search = (x, y) -> searchHorizontal(dna, x, y);
                 ThreeFunction<Integer, Sequence> createNewSequence = (x, y, c) -> new Sequence(x, y, x, y + c);
                 findSequence(i, j, sequenceLength, map.get(HORIZONTAL), Sequence::isInRange, search, createNewSequence);
-                if (count(map) >= 2) {
+                if (count(map) > minSequences) {
                     return true;
                 }
 
@@ -42,7 +42,7 @@ public class MutantUtil {
                 search = (x, y) -> searchVertical(dna, x, y);
                 createNewSequence = (x, y, c) -> new Sequence(x, y, x + c, y);
                 findSequence(i, j, sequenceLength, map.get(VERTICAL), Sequence::isInRange, search, createNewSequence);
-                if (count(map) >= 2) {
+                if (count(map) > minSequences) {
                     return true;
                 }
 
@@ -50,7 +50,7 @@ public class MutantUtil {
                 search = (x, y) -> searchDiagonal(dna, x, y);
                 createNewSequence = (x, y, c) -> new Sequence(x, y, x + c, y + c);
                 findSequence(i, j, sequenceLength, map.get(DIAGONAL), Sequence::isInRange, search, createNewSequence);
-                if (count(map) >= 2) {
+                if (count(map) > minSequences) {
                     return true;
                 }
 
@@ -58,7 +58,7 @@ public class MutantUtil {
                 search = (x, y) -> searchDiagonalInverse(dna, x, y);
                 createNewSequence = (x, y, c) -> new Sequence(x + c, y - c, x, y);
                 findSequence(i, j, sequenceLength, map.get(DIAGONAL_INVERSE), Sequence::isInInverseRange, search, createNewSequence);
-                if (count(map) >= 2) {
+                if (count(map) > minSequences) {
                     return true;
                 }
             }

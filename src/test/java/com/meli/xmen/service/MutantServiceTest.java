@@ -52,7 +52,7 @@ class MutantServiceTest {
         Mockito.when(repository.existsById(any())).thenReturn(false);
         Mockito.when(repository.save(any())).thenReturn(new Human());
         try (MockedStatic<MutantUtil> mocked = Mockito.mockStatic(MutantUtil.class)) {
-            mocked.when(() -> MutantUtil.isMutant(any(), anyInt())).thenReturn(true);
+            mocked.when(() -> MutantUtil.isMutant(any(), anyInt(), anyInt())).thenReturn(true);
             boolean isMutant = service.verifyMutant(DNA);
             assertTrue(isMutant);
         }

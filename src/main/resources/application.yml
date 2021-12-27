@@ -12,3 +12,9 @@ spring:
     type: redis
   redis:
     time-to-live: 300000
+
+springdoc:
+  packagesToScan: com.meli.xmen.api.v1.controller
+  springdoc:
+    api-docs:
+      path: /api-docs
