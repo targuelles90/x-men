@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13.1
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    restart: always
+  cache:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
+    restart: always
+  api:
+    build:
+      context: .
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - XMEN_MUTANT_DNA_SIZE=4
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
