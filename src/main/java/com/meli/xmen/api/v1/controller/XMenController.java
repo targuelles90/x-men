@@ -3,7 +3,6 @@ package com.meli.xmen.api.v1.controller;
 import com.meli.xmen.api.v1.dto.HumanDto;
 import com.meli.xmen.model.Stats;
 import com.meli.xmen.service.MutantService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
