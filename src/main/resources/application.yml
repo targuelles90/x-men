@@ -8,3 +8,7 @@ spring:
     username: <username/>
     password: <password/>
 
+  cache:
+    type: redis
+  redis:
+    time-to-live: 300000

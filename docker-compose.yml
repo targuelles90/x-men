@@ -22,7 +22,10 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=secret
       - XMEN_MUTANT_DNA_SIZE=4
+      - SPRING_REDIS_HOST=cache
+      - SPRING_REDIS_PORT=6379
     ports:
       - "8080:8080"
     depends_on:
       - db
+      - cache
