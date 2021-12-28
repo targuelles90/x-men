@@ -8,7 +8,9 @@ It also provides some statistics, to know the ratio between humans and mutants.
 ```sh
 docker-compose up -d
 ```
-3. Explore the [api](http://localhost:8080/swagger-ui.html)
+3. Explore the API
+   1. [Local](http://localhost:8080/swagger-ui.html)
+   2. [Heroku](https://api-x-men.herokuapp.com/swagger-ui/index.html)
 4. Have fun!
 
 ### How to stop
