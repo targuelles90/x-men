@@ -3,6 +3,7 @@ package com.meli.xmen.service;
 import com.meli.xmen.model.Human;
 import com.meli.xmen.model.Stats;
 import com.meli.xmen.repository.HumanRepository;
+import com.meli.xmen.utils.MutantUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

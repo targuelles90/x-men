@@ -27,6 +27,7 @@ public class XMenController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Is a Mutant"),
             @ApiResponse(responseCode = "403", description = "Is not a Mutant"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     @ResponseBody
     public ResponseEntity<Void> verifyMutant(@Valid @RequestBody HumanDto dto) {

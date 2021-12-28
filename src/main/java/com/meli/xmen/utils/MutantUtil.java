@@ -1,4 +1,4 @@
-package com.meli.xmen.service;
+package com.meli.xmen.utils;
 
 import com.meli.xmen.model.Sequence;
 
@@ -34,7 +34,7 @@ public class MutantUtil {
                 IntBinaryOperator search = (x, y) -> searchHorizontal(dna, x, y);
                 ThreeFunction<Integer, Sequence> createNewSequence = (x, y, c) -> new Sequence(x, y, x, y + c);
                 findSequence(i, j, sequenceLength, map.get(HORIZONTAL), Sequence::isInRange, search, createNewSequence);
-                if (count(map) > minSequences) {
+                if (hasMinimumMutantSequences(map, minSequences)) {
                     return true;
                 }
 
@@ -42,7 +42,7 @@ public class MutantUtil {
                 search = (x, y) -> searchVertical(dna, x, y);
                 createNewSequence = (x, y, c) -> new Sequence(x, y, x + c, y);
                 findSequence(i, j, sequenceLength, map.get(VERTICAL), Sequence::isInRange, search, createNewSequence);
-                if (count(map) > minSequences) {
+                if (hasMinimumMutantSequences(map, minSequences)) {
                     return true;
                 }
 
@@ -50,7 +50,7 @@ public class MutantUtil {
                 search = (x, y) -> searchDiagonal(dna, x, y);
                 createNewSequence = (x, y, c) -> new Sequence(x, y, x + c, y + c);
                 findSequence(i, j, sequenceLength, map.get(DIAGONAL), Sequence::isInRange, search, createNewSequence);
-                if (count(map) > minSequences) {
+                if (hasMinimumMutantSequences(map, minSequences)) {
                     return true;
                 }
 
@@ -58,7 +58,7 @@ public class MutantUtil {
                 search = (x, y) -> searchDiagonalInverse(dna, x, y);
                 createNewSequence = (x, y, c) -> new Sequence(x + c, y - c, x, y);
                 findSequence(i, j, sequenceLength, map.get(DIAGONAL_INVERSE), Sequence::isInInverseRange, search, createNewSequence);
-                if (count(map) > minSequences) {
+                if (hasMinimumMutantSequences(map, minSequences)) {
                     return true;
                 }
             }
@@ -66,8 +66,8 @@ public class MutantUtil {
         return false;
     }
 
-    static int count(Map<String, List<Sequence>> map) {
-        return map.get(HORIZONTAL).size() + map.get(VERTICAL).size() + map.get(DIAGONAL).size() + map.get(DIAGONAL_INVERSE).size();
+    static boolean hasMinimumMutantSequences(Map<String, List<Sequence>> map, int minSequences) {
+        return map.get(HORIZONTAL).size() + map.get(VERTICAL).size() + map.get(DIAGONAL).size() + map.get(DIAGONAL_INVERSE).size() >= minSequences;
     }
 
     static void findSequence(int i, int j, int sequenceLength, List<Sequence> sequences, ThreeFunction<Sequence, Boolean> condition, IntBinaryOperator custom, ThreeFunction<Integer, Sequence> ss) {

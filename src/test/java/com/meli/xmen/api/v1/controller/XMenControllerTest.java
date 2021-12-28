@@ -53,7 +53,7 @@ class XMenControllerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"ATGC,CAGTGC,TTATGT,AGAAGG,CCCCTA,TCACTG", "ATG,TTA", "WER,ASD,QWE"})
+    @ValueSource(strings = {"ATGC,CAGTGC,TTATGT,AGAAGG,CCCCTA,TCACTG", "ATG,TTA", "WER,ASD,QWE", "ASA,CCC,TTT"})
     void givenInValidDna_thenReturnBadRequest(String dna) throws Exception {
         Mockito.when(service.verifyMutant(Mockito.any())).thenReturn(true);
         HumanDto dto = new HumanDto();

@@ -1,4 +1,4 @@
-package com.meli.xmen.service;
+package com.meli.xmen.utils;
 
 @FunctionalInterface
 public interface ThreeFunction<T, R> {

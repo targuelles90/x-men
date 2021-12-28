@@ -1,5 +1,6 @@
 package com.meli.xmen.service;
 
+import com.meli.xmen.utils.MutantUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -32,6 +33,6 @@ class MutantUtilTest {
     })
     void givenMutantDna_thenReturnFalse(String dna, int sequence) {
         String[] input = dna.split("-");
-        assertFalse(MutantUtil.isMutant(input, sequence, 1));
+        assertFalse(MutantUtil.isMutant(input, sequence, 2));
     }
 }

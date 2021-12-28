@@ -2,8 +2,11 @@ package com.meli.xmen.api.constrain;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DnaValidator implements ConstraintValidator<DnaConstrain, String[]> {
+    private final List<Character> validChars = new ArrayList<>(List.of('A', 'C', 'G', 'T'));
 
     @Override
     public boolean isValid(String[] list, ConstraintValidatorContext context) {
@@ -14,7 +17,7 @@ public class DnaValidator implements ConstraintValidator<DnaConstrain, String[]>
 
             for (int i = 0; i < dna.length(); i++) {
                 char c = dna.charAt(i);
-                if (c != 'A' && c != 'T' && c != 'C' && c != 'G') return false;
+                if (!validChars.contains(c)) return false;
             }
         }
 

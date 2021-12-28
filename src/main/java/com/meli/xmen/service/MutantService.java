@@ -3,6 +3,7 @@ package com.meli.xmen.service;
 import com.meli.xmen.model.Human;
 import com.meli.xmen.model.Stats;
 import com.meli.xmen.repository.HumanRepository;
+import com.meli.xmen.utils.MutantUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
@@ -20,7 +21,7 @@ public class MutantService {
     @Value("${xmen.mutant.dna.size:4}")
     private int dnaSize;
 
-    @Value("${xmen.mutant.min_sequences:1}")
+    @Value("${xmen.mutant.min_sequences:2}")
     private int minSequences;
 
     public boolean verifyMutant(String[] dna) {

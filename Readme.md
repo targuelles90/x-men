@@ -30,7 +30,7 @@ Environment variable | Description | Default value
 `SPRING_DATASOURCE_USERNAME` | The username of the database. | `postgres`
 `SPRING_DATASOURCE_PASSWORD` | The password of the database. | `secret`
 `XMEN_MUTANT_DNA_SIZE` | The size of the dna to be considered as mutant. | `4`
-`XMEN_MUTANT_MIN_SEQUENCES` | Minimum number of sequences to be considered as mutant. | `1`
+`XMEN_MUTANT_MIN_SEQUENCES` | Minimum number of sequences to be considered as mutant. | `2`
 
 ### Endpoints
 - `POST /mutant` : To know if a human is mutant or not.
